@@ -1,0 +1,28 @@
+.leaflet-container {
+  width: 95%;
+  height: 95%;
+  margin: 2%;
+  border-radius: 2%;
+}
+
+.container-fluid {
+  background-color: #F8FAFB;
+}
+
+.btn-primary {
+  background-color: #e95c0a;
+  border: none;
+  font-weight: 700;
+  align-self: center;
+}
+
+.btn-primary:hover {
+  background-color: #032d67;
+}
+
+.card-title {
+  font-family: Raleway, Lato, sans-serif !important;
+  font-weight: 600;
+  color: #032d67 !important;
+}
+
