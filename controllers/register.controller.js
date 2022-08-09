@@ -20,9 +20,7 @@ export const register = async (req, res, next) => {
     });
 
     const savedRegister = await newRegister.save();
-    sendEmail('Miguelangel').catch(console.error);
-
-    res.status(200).json({
+    const response = {
       name: savedRegister.name,
       lastname: savedRegister.lastname,
       email: savedRegister.email,
@@ -34,10 +32,12 @@ export const register = async (req, res, next) => {
       service: savedRegister.service,
       comments: savedRegister.comments,
       date: savedRegister.date,
-    });
+    };
+
+    sendEmail(response).catch(console.error);
+    res.status(200).json(response);
   } catch (err) {
     res.status(403).json({ err });
-    // res.status(403).json({ message: err.message, code: err.code });
     next(err);
   }
 };

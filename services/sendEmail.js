@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
+import { emailTemplate } from '../utils/emailTemplate.js';
 
-export const sendEmail = async (nombre) => {
+export const sendEmail = async (response) => {
   const transporter = nodemailer.createTransport({
     host: process.env.HOST_EMAIL,
     port: process.env.PORT_EMAIL,
@@ -15,6 +16,6 @@ export const sendEmail = async (nombre) => {
     from: `Soporte de servicio <${process.env.USER_EMAIL}>`,
     to: process.env.RECEIVER_EMAIL,
     subject: 'Nueva solicitud de servicio',
-    html: `<h1> Nueva Solicitud ${nombre}</h1>`,
+    html: emailTemplate(response),
   });
 };
