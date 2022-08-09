@@ -1,6 +1,6 @@
 import Services from '../models/Services.js';
 
-// Add Service
+// POST
 
 export const addService = async (req, res, next) => {
   try {
@@ -15,7 +15,7 @@ export const addService = async (req, res, next) => {
   }
 };
 
-// Get all Services
+// GET ALL
 
 export const getServices = async (req, res, next) => {
   try {
@@ -24,5 +24,31 @@ export const getServices = async (req, res, next) => {
     res.status(200).json(services);
   } catch (error) {
     next(error);
+  }
+};
+
+// UPDATE
+
+export const updateService = async (req, res, next) => {
+  try {
+    const updateService = await Services.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(updateService);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// DELETE ONE
+
+export const deleteService = async (req, res, next) => {
+  try {
+    await Services.findByIdAndDelete(req.params.id);
+    res.status(200).json('Service deleted');
+  } catch (err) {
+    next(err);
   }
 };

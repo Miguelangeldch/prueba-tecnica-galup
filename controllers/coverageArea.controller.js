@@ -20,7 +20,7 @@ export const addZone = async (req, res, next) => {
   }
 };
 
-// GET
+// GET ALL
 
 export const getZones = async (req, res, next) => {
   try {
@@ -32,7 +32,7 @@ export const getZones = async (req, res, next) => {
   }
 };
 
-// UPDATE
+// UPDATE ONE
 
 export const updateZone = async (req, res, next) => {
   try {
@@ -47,12 +47,12 @@ export const updateZone = async (req, res, next) => {
   }
 };
 
-// DELETE
+// DELETE ONE
 
 export const deleteZone = async (req, res, next) => {
   try {
     await CoverageArea.findByIdAndDelete(req.params.id);
-    res.status(200).json('Zone has been deleted');
+    res.status(200).json('Zone deleted');
   } catch (err) {
     next(err);
   }

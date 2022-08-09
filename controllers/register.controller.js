@@ -1,7 +1,7 @@
 import Register from '../models/Register.js';
 import { sendEmail } from '../services/sendEmail.js';
 
-// REGISTER
+// POST
 
 export const register = async (req, res, next) => {
   try {
@@ -38,6 +38,44 @@ export const register = async (req, res, next) => {
     res.status(200).json(response);
   } catch (err) {
     res.status(403).json({ err });
+    next(err);
+  }
+};
+
+// GET ALL
+
+export const getRegisters = async (req, res, next) => {
+  try {
+    const registers = await Register.find();
+
+    res.status(200).json(registers);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// UPDATE
+
+export const updateRegister = async (req, res, next) => {
+  try {
+    const updateRegister = await Register.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(updateRegister);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// DELETE ONE
+
+export const deleteRegister = async (req, res, next) => {
+  try {
+    await Register.findByIdAndDelete(req.params.id);
+    res.status(200).json('Register deleted');
+  } catch (err) {
     next(err);
   }
 };
