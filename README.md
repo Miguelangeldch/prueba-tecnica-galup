@@ -21,9 +21,9 @@ Dentro del directorio **/Client** para ejecutar el **Front** ruta: \
 ###### Backend
 - express
 - mongoose
-- dotenv
-- cors
+- nodemailer
 
 ###### Frontend
+- React
 - leaflet
 - axios
