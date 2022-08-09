@@ -2,8 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SuccessFields from '../components/SuccessFields';
 
-const Success = ({ values }) => {
-  console.log(Object.values(values));
+const Success = ({ values, setValues }) => {
+  const handleOnClick = () => {
+    setValues({
+      name: '',
+      lastname: '',
+      email: '',
+      phone: '',
+      location: { lat: '', lng: '' },
+      service: '',
+      comment: ''
+    });
+  };
 
   return (
     <>
@@ -21,7 +31,11 @@ const Success = ({ values }) => {
             </p>
             <SuccessFields values={values} />
           </div>
-          <Link to={'/'} className='btn btn-primary col-md-4 m-3'>
+          <Link
+            to={'/'}
+            onClick={handleOnClick}
+            className='btn btn-primary col-md-4 m-3'
+          >
             Aceptar
           </Link>
         </div>

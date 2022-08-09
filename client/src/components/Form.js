@@ -1,50 +1,36 @@
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
 import FormFields from './FormFields';
 import useFetch from '../hooks/useFetch';
 import { postRegister } from '../utils/postRegister';
-import { alertDuplicatedEmailPhone } from '../utils/alertDuplicatedEmailPhone';
+import { alertMessage } from '../utils/alertMessage';
+import getDate from '../utils/getDate';
 
 const Form = ({ setValues, values }) => {
   const navigate = useNavigate();
   const { data } = useFetch('/service');
 
-  const [name, setName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [lat, setLat] = useState('');
-  const [long, setLong] = useState('');
-  const [service, setService] = useState('');
-  const [comment, setComment] = useState('');
-
-  useEffect(() => {
-    setValues((prevValues) => ({
-      ...prevValues,
-      name: name,
-      lastname: lastName,
-      email: email,
-      phone: phone,
-      location: {
-        lat: lat,
-        lng: long,
-      },
-      service: service,
-      comment: comment,
-    }));
-  }, [comment, email, lastName, lat, long, name, phone, service, setValues]);
-
   const onSubmit = (e) => {
     e.preventDefault();
-    const getData = async () => {
-      const data = await postRegister('/register', values);
-      if (data.error) {
-        alertDuplicatedEmailPhone();
+    const date = getDate();
+
+    const postResult = async () => {
+      const result = await postRegister('/register', { ...values, date });
+      const error = result.error.err;
+      if (error) {
+        error.code
+          ? alertMessage(
+              'El correo electrónico o número de teléfono ya se encuentra registrado'
+            )
+          : alertMessage(
+              'Los campos teléfono, latitud y longitud, deben ser númericos.'
+            );
       } else {
+        console.log(Object.values(result.data));
         navigate('/success', { replace: true });
       }
     };
-    getData();
+
+    postResult();
   };
 
   return (
@@ -55,25 +41,25 @@ const Form = ({ setValues, values }) => {
           id={'name'}
           type={'text'}
           placeholder={'Nombre'}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={values.name}
+          onChange={(e) => setValues({ ...values, name: e.target.value })}
           required
         />
         <FormFields
           label={'Apellido'}
-          id={'lastName'}
+          id={'lastname'}
           type={'text'}
           placeholder={'Apellido'}
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          value={values.lastname}
+          onChange={(e) => setValues({ ...values, lastname: e.target.value })}
         />
         <FormFields
           label={'Correo Electrónico *'}
           id={'email'}
           type={'email'}
           placeholder={'xxx@xxxx.com'}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={values.email}
+          onChange={(e) => setValues({ ...values, email: e.target.value })}
           required
         />
         <FormFields
@@ -81,8 +67,10 @@ const Form = ({ setValues, values }) => {
           id={'phone'}
           type={'tel'}
           placeholder={'xxxx-xxx-xxxx'}
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          value={values.phone}
+          maxLength={11}
+          minLength={11}
+          onChange={(e) => setValues({ ...values, phone: e.target.value })}
           required
         />
 
@@ -96,16 +84,20 @@ const Form = ({ setValues, values }) => {
           type={'number'}
           placeholder={'Latitud'}
           value={values.location.lat}
-          onChange={(e) => setLat(e.target.value)}
+          onChange={(e) =>
+            setValues({ ...values, location: { lat: e.target.value } })
+          }
           required
         />
         <FormFields
           label={'Longitud *'}
-          id={'long'}
+          id={'lng'}
           type={'number'}
           placeholder={'Longitud'}
           value={values.location.lng}
-          onChange={(e) => setLong(e.target.value)}
+          onChange={(e) =>
+            setValues({ ...values, location: { lng: e.target.value } })
+          }
           required
         />
 
@@ -113,8 +105,8 @@ const Form = ({ setValues, values }) => {
           <select
             id='service'
             className='form-select'
-            value={service}
-            onChange={(e) => setService(e.target.value)}
+            value={values.service}
+            onChange={(e) => setValues({ ...values, service: e.target.value })}
             // required
           >
             <option value=''>Seleccione el servicio *</option>
@@ -135,8 +127,8 @@ const Form = ({ setValues, values }) => {
             className='form-control'
             placeholder='Leave a comment here'
             id='floatingTextarea'
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            value={values.comment}
+            onChange={(e) => setValues({ ...values, comment: e.target.value })}
           ></textarea>
           <label htmlFor='floatingTextarea'>Comentarios:</label>
         </div>

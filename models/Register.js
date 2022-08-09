@@ -37,8 +37,10 @@ const RegisterSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-  },
-  { timestamps: true }
+    date: {
+      type: String
+    }
+  }
 );
 
 export default mongoose.model('Register', RegisterSchema);

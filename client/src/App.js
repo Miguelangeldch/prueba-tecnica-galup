@@ -5,7 +5,15 @@ import Home from './pages/Home';
 import Success from './pages/Success';
 
 function App() {
-  const [values, setValues] = useState({ location: { lat: '', lng: '' } });
+  const [values, setValues] = useState({
+    name: '',
+    lastname: '',
+    email: '',
+    phone: '',
+    location: { lat: '', lng: '' },
+    service: '',
+    comment: ''
+  });
   return (
     <>
       <Router>
@@ -14,7 +22,7 @@ function App() {
             path={'/'}
             element={<Home setValues={setValues} values={values} />}
           />
-          <Route path={'/success'} element={<Success values={values} />} />
+          <Route path={'/success'} element={<Success setValues={setValues} values={values} />} />
         </Routes>
       </Router>
     </>

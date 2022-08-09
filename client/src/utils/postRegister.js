@@ -9,5 +9,5 @@ export const postRegister = async (url, body) => {
     error = await err.response.data;
   }
 
-  return {data, error};
+  return { data, error };
 };

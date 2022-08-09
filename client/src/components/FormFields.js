@@ -8,7 +8,9 @@ const FormFields = ({
   value,
   onChange,
   required,
-  readOnly
+  readOnly,
+  maxLength,
+  minLength,
 }) => {
   return (
     <div className='form-floating mb-3 col-md-6'>
@@ -21,6 +23,8 @@ const FormFields = ({
         onChange={onChange}
         required={required}
         readOnly={readOnly}
+        maxLength={maxLength}
+        minLength={minLength}
       />
       <label className='form-label' htmlFor={id}>
         {label}
