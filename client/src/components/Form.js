@@ -12,12 +12,13 @@ const Form = ({ setValues, values }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const date = getDate();
+    setValues({...values, date})
 
     const postResult = async () => {
       const result = await postRegister('/register', { ...values, date });
-      const error = result.error.err;
+      const error = result.error
       if (error) {
-        error.code
+        error.error.code
           ? alertMessage(
               'El correo electrónico o número de teléfono ya se encuentra registrado'
             )

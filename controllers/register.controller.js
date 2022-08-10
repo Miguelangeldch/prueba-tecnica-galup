@@ -36,9 +36,9 @@ export const register = async (req, res, next) => {
 
     sendEmail(response).catch(console.error);
     res.status(200).json(response);
-  } catch (err) {
-    res.status(403).json({ err });
-    next(err);
+  } catch (error) {
+    res.status(403).json({ error });
+    next(error);
   }
 };
 

@@ -11,7 +11,8 @@ const Success = ({ values, setValues }) => {
       phone: '',
       location: { lat: '', lng: '' },
       service: '',
-      comment: ''
+      comment: '',
+      date: ''
     });
   };
 

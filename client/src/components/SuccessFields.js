@@ -35,6 +35,10 @@ const SuccessFields = ({ values }) => {
           <h6> Comentarios: </h6>
           {values.comment}
         </li>
+        <li className='list-group-item'>
+          <h6> Fecha: </h6>
+          {values.date}
+        </li>
       </ul>
     </div>
   );

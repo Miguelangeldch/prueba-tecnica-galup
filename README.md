@@ -1,6 +1,6 @@
 # Formulario de solicitud de Servicio
 ![home_page](https://user-images.githubusercontent.com/67972977/183468145-822d3ffc-588e-40fb-8e54-14481e7a92b1.png)
-![success_page](https://user-images.githubusercontent.com/67972977/183468292-1f5dd854-8d6a-42e0-baed-241eff410005.png)
+![success_page](https://user-images.githubusercontent.com/67972977/183786054-1adffe9d-4ea1-40c9-bc40-36204dc65ad9.png)
 
 
 ## Scripts disponibles
