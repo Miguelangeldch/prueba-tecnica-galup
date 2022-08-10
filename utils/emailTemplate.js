@@ -19,7 +19,7 @@ export const emailTemplate = (response) => {
     <h4 style="display:inline">• Teléfono:</h4>
     <span>${response.phone}</span>
     <br>
-    <h4 style="display:inline">• location:</h4>
+    <h4 style="display:inline">• Ubicación:</h4>
     <br>
     <span>○ Latitud: ${response.location.lat}</span> 
     <br>
@@ -33,6 +33,7 @@ export const emailTemplate = (response) => {
     <br>
     <h4 style="display:inline">• Fecha:</h4>
     <span>${response.date}</span>
+    <hr>
 </body>
 </html>
     `;
